@@ -1,6 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const myFunc = (num) => {
-    return num * 5;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.default = myFunc;
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const index_1 = __importDefault(require("./routes/index"));
+const app = (0, express_1.default)();
+const port = 3000;
+app.use("/api", index_1.default);
+app.listen(port, () => {
+    console.log(`listening on port ${port}`);
+});
+app.get("/", (req, res) => {
+    res.send("hello");
+});
+app.get("/*", (req, res) => {
+    res.status(404).send("<h1>404 : ( </h1>");
+});
